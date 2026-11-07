@@ -27,7 +27,14 @@ namespace InventarioAPI.Controllers
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
                 Precio = (double)dto.Precio,
-                Stock = dto.Stock
+                Stock = dto.Stock,
+                Categoria = dto.Categoria,
+                Etiquetas = dto.Etiquetas,
+                Proveedor = new Proveedor
+                {
+                    Nombre = dto.Proveedor.Nombre,
+                    Contacto = dto.Proveedor.Contacto
+                }
             });
             return Ok(producto);
         }
@@ -54,6 +61,42 @@ namespace InventarioAPI.Controllers
             });
 
             return Ok(json);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Creador")]
+        public async Task<IActionResult> Update(string id, ProductoDto dto)
+        {
+            var producto = await _productoRepository.ActualizarAsync(id, new Producto()
+            {
+                Nombre = dto.Nombre,
+                Descripcion = dto.Descripcion,
+                Precio = (double)dto.Precio,
+                Stock = dto.Stock,
+                Categoria = dto.Categoria,
+                Etiquetas = dto.Etiquetas,
+                Proveedor = new Proveedor
+                {
+                    Nombre = dto.Proveedor.Nombre,
+                    Contacto = dto.Proveedor.Contacto
+                }
+            });
+
+            if (producto == null) return NotFound(new { mensaje = "Producto no encontrado" });
+            return Ok(producto);
+        }
+
+        [HttpGet("buscar")]
+        [Authorize(Roles = "Visualizador,Creador")]
+        public async Task<IActionResult> Buscar(
+        string? categoria, double? precioMin, double? precioMax, string? proveedor,
+        string? etiqueta, bool soloConStock = false, string ordenarPor = "nombre",
+        bool descendente = false, int pagina = 1, int tamano = 10)
+        {
+            var result = await _productoRepository.BuscarAsync(
+                categoria, precioMin, precioMax, proveedor, etiqueta,
+                soloConStock, ordenarPor, descendente, pagina, tamano);
+            return Ok(result);
         }
     }
 }

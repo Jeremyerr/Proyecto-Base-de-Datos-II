@@ -1,0 +1,295 @@
+{
+  "info": {
+    "name": "INVENTARIO_PRUEBAS",
+    "description": "Colección de pruebas de Inventario. Configurar baseUrl, credenciales y variables de autenticación para ejecutar las solicitudes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "LOGIN_VISUALIZADOR",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"visualizador@api.com\",\n  \"password\": \"{{login_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_03hu}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LOGIN_CREADOR",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{creador_email}}\",\n  \"password\": \"{{login_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREAR_PRODUCTO",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Silla gamer\",\r\n  \"descripcion\": \"Silla ergonómica con soporte lumbar\",\r\n  \"precio\": 149.99,\r\n  \"stock\": 12,\r\n  \"categoria\": \"Mobiliario\",\r\n  \"etiquetas\": [\"oficina\", \"nuevo\"],\r\n  \"proveedor\": { \"nombre\": \"Mobiliarios del Valle\", \"contacto\": \"2556-7070\" }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_03hu}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ACTUALIZAR_PRODUCTO",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos/6aef982a366e31723fc43dbc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "6aef982a366e31723fc43dbc"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Silla gamer\",\r\n  \"descripcion\": \"Silla ergonómica con soporte lumbar\",\r\n  \"precio\": 129.99,\r\n  \"stock\": 20,\r\n  \"categoria\": \"Mobiliario\",\r\n  \"etiquetas\": [\"oficina\", \"oferta\"],\r\n  \"proveedor\": { \"nombre\": \"Mobiliarios del Valle\", \"contacto\": \"2556-7070\" }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0h8w}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BUSCAR_PRODUCTO",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos/buscar?proveedor=Tecnoimport+S.A.&ordenarPor=stock&descendente=true&pagina=1&tamano=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "proveedor",
+              "value": "Tecnoimport S.A."
+            },
+            {
+              "key": "ordenarPor",
+              "value": "stock"
+            },
+            {
+              "key": "descendente",
+              "value": "true"
+            },
+            {
+              "key": "pagina",
+              "value": "1"
+            },
+            {
+              "key": "tamano",
+              "value": "5"
+            }
+          ]
+        },
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0l75}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "REPORTE_DE_INVERSION",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos/reporte-inversion",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "reporte-inversion"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PRODUCTOS_PAGINADOS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos/0/5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos",
+            "0",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7059",
+      "type": "string"
+    },
+    {
+      "key": "json_web_token_03hu",
+      "value": "",
+      "type": "secret",
+      "disabled": false
+    },
+    {
+      "key": "json_web_token_0h8w",
+      "value": "",
+      "type": "secret",
+      "disabled": false
+    },
+    {
+      "key": "json_web_token_0l75",
+      "value": "",
+      "type": "secret",
+      "disabled": false
+    },
+    {
+      "key": "login_password",
+      "value": "",
+      "type": "secret"
+    },
+    {
+      "key": "creador_email",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

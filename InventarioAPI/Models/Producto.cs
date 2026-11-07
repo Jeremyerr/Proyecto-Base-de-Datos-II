@@ -6,6 +6,8 @@
         public string Descripcion { get; set; } = string.Empty;
         public double Precio { get; set; }
         public int Stock { get; set; }
+        public string Categoria { get; set; } = string.Empty;
+        public List<string> Etiquetas { get; set; } = new();
 
         //  proveedor embebido requerido por la tarea
         public Proveedor Proveedor { get; set; } = new Proveedor();
